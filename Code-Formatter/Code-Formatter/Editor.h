@@ -12,7 +12,8 @@ public:
 	void _brace(std::ofstream &output);
 	void _brace_add();
 	void _brace_end(std::ofstream &output);
-	void _tab();
+	void _tab(std::ofstream &output);
+	void _tab_add();
 	void _enter(std::ofstream &output);
 	void _comma();
 };

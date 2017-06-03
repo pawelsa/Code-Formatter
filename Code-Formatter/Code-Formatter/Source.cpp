@@ -3,25 +3,25 @@
 #include "Editor.h"
 
 char c;
+edit file;
 
 bool functions(std::ifstream &source, std::ofstream &output,char *prefix[],int to_prefix[]){
 	for (int i = 0; i < 7; i++) {
-		int j, inside=0;
+		int j;
 		for (j = 0; j < to_prefix[i]; j++, source.get(c)) {
 			if (c == prefix[i][j]) {
-				inside++;
 				if ((j + 1) == to_prefix[i]) {
-					output << std::endl << prefix[i];
-					std::cout << std::endl << prefix[i];
-					source.seekg((j-1), source.cur);
+					output << std::endl;
+					file._tab(output);
+					output << prefix[i];
+					source.seekg((j-2), source.cur);
 					return false;
 				}
 			}
 			else {
-				if (inside != 0) {
-					source.seekg(-(inside-1), source.cur);
-					//output << c;
-					//std::cout << c;
+				if (j != 0) {
+					source.seekg(-(j)-1, source.cur);
+					source.get(c);
 				}
 				return true;
 			}
@@ -42,52 +42,16 @@ int main() {
 	char *prefix[10] = { "for","while","do","if","void","switch","class","structure" };
 	int to_prefix[8] = { 3,5,2,2,4,6,5,9 };
 
-	edit file;
 	int end = 0;
 	while (!source.eof() && end<1) {
 		while (source.get(c)) {
 			while (c == '\t' || c == '\n')
 				source.get(c);
 			
-			//if (c != 100 && c != 99 && c != 102 && c != 105 && c != 115 && c != 119 && c != 118 && c != 67 && c != 68 && c != 70 && c != 73 && c != 83 && c != 86 && c != 87)
 			if (functions(source, output, prefix, to_prefix)) {
 				output << c;
-				std::cout << c;
 			}
 			switch (c) {
-				/*case 100:
-				case 99:
-				case 102:
-				case 105:
-				case 115:
-				case 119:
-				case 118:
-				case 67:
-				case 68:
-				case 70:
-				case 73:
-				case 83:
-				case 86:
-				case 87: {
-					for (int i = 0; i < 7; i++) {
-						int j;
-						for (j = 0; j < to_prefix[i]; j++, source.get(c)) {
-							if (c == prefix[i][j]) {
-								if ((j + 1) == to_prefix[i]) {
-									output << std::endl << prefix[i];
-									source.seekg(j, source.cur);
-									break;
-								}
-							}
-							else {
-								
-								break;
-							}
-						}
-						source.seekg(-j, source.cur);
-					}
-					break;
-				}*/
 				case 40: {
 					file._bracket();
 					break;
@@ -99,7 +63,6 @@ int main() {
 				case 123: {
 					source.get(c);
 					while (c == 32 || c == 10 || c == 9) {
-						//output << c;
 						source.get(c);
 					}
 
@@ -144,8 +107,10 @@ int main() {
 				}
 				case 42: {
 					source.get(c);
-					if (c == '/')
+					if (c == '/') {
 						output << '/' << std::endl;
+						file._tab(output);
+					}
 					else
 						source.seekg(-1,source.cur);
 					break;
@@ -160,24 +125,3 @@ int main() {
 	
 	return 0;
 }
-
-/*{
-for (int i = 0; i < 7; i++) {
-	int j;
-	for (j = 0; j < to_prefix[i]; j++, source.get(c)) {
-		if (c == prefix[i][j]) {
-			if ((j + 1) == to_prefix[i]) {
-				output << std::endl << prefix[i];
-				source.seekg(j, source.cur);
-				break;
-			}
-		}
-		else {
-
-			break;
-		}
-	}
-	source.seekg(-j, source.cur);
-}
-break;
-	*/
