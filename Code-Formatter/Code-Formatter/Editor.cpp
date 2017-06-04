@@ -39,4 +39,21 @@ void edit::_enter(std::ofstream &output) {
 }
 void edit::_tab_add() {
 	tab++;
+}void edit::_comment() {
+	if (comment == 0)
+		comment++;
+	else
+		comment--;
+}
+int edit::_comment_return() {
+	return comment;
+}
+void edit::_quotation() {
+	if (quotation == 0)
+		quotation++;
+	else
+		quotation--;
+}
+int edit::_quotation_return() {
+	return quotation;
 }

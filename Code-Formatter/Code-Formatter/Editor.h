@@ -5,7 +5,8 @@ class edit {
 	int bracket = 0;
 	int brace = 0;
 	int tab = 0;
-
+	int comment = 0;
+	int quotation = 0;
 public:
 	void _bracket();
 	void _bracket_end(std::ofstream &output);
@@ -15,5 +16,8 @@ public:
 	void _tab(std::ofstream &output);
 	void _tab_add();
 	void _enter(std::ofstream &output);
-	void _comma();
+	void _comment();
+	int _comment_return();
+	void _quotation();
+	int _quotation_return();
 };
