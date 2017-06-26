@@ -2,8 +2,8 @@
 #include <fstream>
 
 class edit {
-	int bracket = 0;
-	int brace = 0;
+	int bracket = 0;	//nawias
+	int brace = 0;		//klamra
 	int tab = 0;
 	int comment = 0;
 	int quotation = 0;

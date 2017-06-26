@@ -127,6 +127,34 @@ int main() {
 				break;
 
 			}
+			case 69:
+			case 101: {
+				
+				char *problem = "else";
+				bool ans=0;
+				for (int i = 1; i < 4; i++) {
+					source.get(c);
+					
+					if (c == ';' || c == '{' || c == '}' || c == '(' || c == ')' || c == '\\' || c == '*') {
+						source.seekg(-1, source.cur);
+						ans = 0;
+						break;
+					}
+					output << c;
+					if (c == problem[i]) {
+						ans = 1;
+						continue;
+					}
+					else {
+						ans = 0;
+						break;
+					}
+				}
+				if (ans == 1)
+					output << std::endl << "\t";
+
+				break;
+			}
 			}
 			last = c;
 		}

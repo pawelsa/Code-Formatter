@@ -9,7 +9,7 @@ void edit::_brace(std::ofstream &output) {
 }
 void edit::_brace_end(std::ofstream &output) {
 	brace--;
-	output <<std::endl;
+	output << std::endl << std::endl;
 	if (brace == 0)
 		output << std::endl; 
 	for (int i = 0; i < (brace + tab); i++)
@@ -30,9 +30,9 @@ void edit::_tab(std::ofstream &output) {
 }
 void edit::_enter(std::ofstream &output) {
 	if (bracket != 0)
-		;
+		output << " ";
 	else {
-		output << std::endl;
+		output << " " << std::endl;
 		for (int i = 0; i < (brace + tab); i++)
 			output << "\t";
 	}
